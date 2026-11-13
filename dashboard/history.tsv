@@ -1,0 +1,3 @@
+# The suite's runs, a line each, oldest first; dashboard.html is made from it. kind: tests (a load run: load). selection: which tests ran.
+when	kind	id	result	passed	failed	skipped	page	note	selection
+2026-11-13 21:54:31	tests	2026-11-13_215431	failed	181	8	0	dashboard/reports/2026-11-13_215431.html		all tests

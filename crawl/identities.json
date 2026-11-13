@@ -1,0 +1,227 @@
+{
+  "tool": "suite-builder",
+  "ledgerVersion": 1,
+  "entities": [
+    {
+      "id": "type:/",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "HomePage",
+      "patterns": [
+        "/"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/timesheet-software",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "TimesheetSoftwarePage",
+      "patterns": [
+        "/timesheet-software"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/legal/security",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "LegalSecurityPage",
+      "patterns": [
+        "/legal/security"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/legal/terms",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "LegalTermsPage",
+      "patterns": [
+        "/legal/terms"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/legal/privacy",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "LegalPrivacyPage",
+      "patterns": [
+        "/legal/privacy"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/legal/cookies",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "LegalCookiesPage",
+      "patterns": [
+        "/legal/cookies"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/legal/acceptable-use",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "LegalAcceptableUsePage",
+      "patterns": [
+        "/legal/acceptable-use"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/ai-timesheets",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "AiTimesheetsPage",
+      "patterns": [
+        "/ai-timesheets"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/blog/*",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "BlogPostPage",
+      "patterns": [
+        "/blog/*"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/blog/archive",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "BlogArchivePage",
+      "patterns": [
+        "/blog/archive"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/blog",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "BlogPage",
+      "patterns": [
+        "/blog"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/connect-ai-assistant",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "ConnectAiAssistantPage",
+      "patterns": [
+        "/connect-ai-assistant"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/pricing",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "PricingPage",
+      "patterns": [
+        "/pricing"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/leave-management",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "LeaveManagementPage",
+      "patterns": [
+        "/leave-management"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/get-started",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "GetStartedPage",
+      "patterns": [
+        "/get-started"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/integrations/jira",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "IntegrationsJiraPage",
+      "patterns": [
+        "/integrations/jira"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    },
+    {
+      "id": "type:/alternatives/harvest",
+      "kind": "page-type",
+      "introducedAt": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5",
+      "cls": "AlternativesHarvestPage",
+      "patterns": [
+        "/alternatives/harvest"
+      ],
+      "lifecycle": {
+        "state": "present",
+        "lastSeenIn": "3536c17f7d93e4ff35f7360f8aa2d414a9b35f61ff67fc838e687eeb34b2ffe5"
+      }
+    }
+  ]
+}

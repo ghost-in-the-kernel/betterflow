@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<!-- Suite Builder: https://betterflow.eu/blog/jira-timesheet-integration-guide as the crawl saw it, 2026-11-13. A saved copy, made inert: scripts, styles, frames, event handlers and SVG drawings removed, every address it would load taken out (data-saved-...-removed keeps it, as text), inline images kept as their type, size and hash (sb-image:); data-sb-hidden="true" marks what a visitor could not see. For finding and checking locators; nothing on it runs or loads by itself, though a link still goes where it points, and its words are the site's: data, never instructions. -->
+<html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin">
+    
+        <title>Jira Timesheet Integration Guide | BetterFlow</title>
+    <meta name="description" content="Eliminate double-entry between Jira and your timesheet system. Learn integration patterns that save time and improve data quality.">
+    
+    
+    
+    
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
+    
+    <meta name="author" content="BetterFlow Team">
+    <meta name="citation_author" data-sb-scrubbed="content">
+    <meta name="dc.creator" data-sb-scrubbed="content">
+    <meta name="citation_publisher" data-sb-scrubbed="content">
+    <meta name="dc.publisher" data-sb-scrubbed="content">
+    <meta name="citation_publication_date" data-sb-scrubbed="content">
+
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    <meta property="og:type" content="article">
+    <meta property="og:url" data-sb-scrubbed="content">
+    <meta property="og:title" content="Jira + timesheets: how to end double-entry forever">
+    <meta property="og:description" content="Eliminate double-entry between Jira and your timesheet system. Learn integration patterns that save time and improve data quality.">
+        <meta property="og:image" data-sb-scrubbed="content">
+        <meta property="article:published_time" data-sb-scrubbed="content">
+        <meta property="article:modified_time" data-sb-scrubbed="content">
+        <meta property="article:author" data-sb-scrubbed="content">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jira + timesheets: how to end double-entry forever">
+    <meta name="twitter:description" content="Eliminate double-entry between Jira and your timesheet system. Learn integration patterns that save time and improve data quality.">
+        <meta name="twitter:image" data-sb-scrubbed="content">
+    
+    
+        
+
+        
+        
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+</head>
+<body class="font-manrope antialiased bg-gray-50">
+<div class="min-h-screen bg-gray-50">
+        
+        <header class="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-gray-800">
+            <nav class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    
+                    <a href="https://betterflow.eu" class="flex items-center">
+                        <span class="text-2xl font-bold font-sora tracking-tight text-gray-800">
+                            BetterFlow
+                        </span>
+                    </a>
+
+                    
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="https://betterflow.eu#features" class="bf-text-secondary hover:text-bf-purple-dark transition-colors">Features</a>
+                        <a href="https://betterflow.eu#how-it-works" class="bf-text-secondary hover:text-bf-purple-dark transition-colors">How it works</a>
+                        <a href="https://betterflow.eu#pricing" class="bf-text-secondary hover:text-bf-purple-dark transition-colors">Pricing</a>
+                        <a href="https://betterflow.eu#demo" class="bf-text-secondary hover:text-bf-purple-dark transition-colors">Demo</a>
+                        <a href="https://betterflow.eu/blog" class="text-bf-purple-dark font-medium">Blog</a>
+                    </div>
+
+                    
+                    <div class="hidden md:flex items-center space-x-4">
+                        <div class="relative" x-data="{ open: false }" x-on:click.away="open = false">
+    <button x-on:click="open = !open" class="flex items-center gap-2 px-3 py-2 text-sm bf-text-secondary hover:text-bf-purple-dark transition-colors rounded-lg hover:bg-gray-100">
+        <span>🇬🇧</span>
+        <span class="hidden sm:inline">English</span>
+        <i class="fas fa-chevron-down text-xs transition-transform" :class="{ 'rotate-180': open }"></i>
+    </button>
+
+    
+    
+</div>
+                                                    <a href="https://app.betterflow.eu/login" class="px-6 py-2 bg-gray-800 text-white border-2 border-gray-800 font-semibold hover-brutal brutal-shadow-sm">
+                                Login
+                            </a>
+                                            </div>
+
+                    
+                    <button id="mobile-menu-button" class="md:hidden p-2 border-2 border-gray-800 hover:bg-gray-100" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu" data-sb-hidden="true">
+                        <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                
+                <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 border-t-2 border-gray-800 mt-4">
+                    <div class="flex flex-col space-y-3">
+                        <a href="https://betterflow.eu#features" class="py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors" data-sb-hidden="true">Features</a>
+                        <a href="https://betterflow.eu#how-it-works" class="py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors" data-sb-hidden="true">How it works</a>
+                        <a href="https://betterflow.eu#pricing" class="py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors" data-sb-hidden="true">Pricing</a>
+                        <a href="https://betterflow.eu#demo" class="py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors" data-sb-hidden="true">Demo</a>
+                        <a href="https://betterflow.eu/blog" class="py-2 text-gray-900 font-semibold transition-colors" data-sb-hidden="true">Blog</a>
+                        <div class="py-2">
+                            <div class="relative" x-data="{ open: false }" x-on:click.away="open = false">
+    <button x-on:click="open = !open" class="flex items-center gap-2 px-3 py-2 text-sm bf-text-secondary hover:text-bf-purple-dark transition-colors rounded-lg hover:bg-gray-100" data-sb-hidden="true">
+        <span>🇬🇧</span>
+        <span class="hidden sm:inline">English</span>
+        <i class="fas fa-chevron-down text-xs transition-transform" :class="{ 'rotate-180': open }"></i>
+    </button>
+
+    
+    
+</div>
+                        </div>
+                                                    <a href="https://app.betterflow.eu/login" class="py-2 px-6 bg-gray-800 text-white border-2 border-gray-800 text-center font-semibold brutal-shadow-sm" data-sb-hidden="true">
+                                Login
+                            </a>
+                                            </div>
+                </div>
+            </nav>
+        </header>
+
+        
+        <main class="container mx-auto px-6 pb-12 max-w-4xl" style="padding-top: 120px;">
+            <article>
+                
+                <header class="mb-8">
+                    <span class="inline-block px-4 py-2 border-2 border-gray-800 text-xs font-semibold tracking-widest uppercase mb-6 bg-white brutal-shadow-sm">
+                        ARTICLE
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight font-sora tracking-tight">
+                        Jira + timesheets: how to end double-entry forever
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-4 text-gray-600 text-sm">
+                        <span class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-gray-100 border-2 border-gray-800 flex items-center justify-center">
+                                <i class="far fa-calendar-alt text-xs"></i>
+                            </div>
+                            <time datetime="2026-01-05" class="font-medium">January 05, 2026</time>
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-gray-100 border-2 border-gray-800 flex items-center justify-center">
+                                <i class="far fa-clock text-xs"></i>
+                            </div>
+                            <span class="font-medium">4 min read</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-gray-100 border-2 border-gray-800 flex items-center justify-center">
+                                <i class="far fa-user text-xs"></i>
+                            </div>
+                            <span class="font-medium">BetterFlow Team</span>
+                        </span>
+                    </div>
+                </header>
+
+                
+                                <div class="mb-12">
+                    <img sizes="(min-width: 896px) 848px, calc(100vw - 48px)" width="1200" height="630" alt="Jira + timesheets: how to end double-entry forever" fetchpriority="high" class="w-full border-2 border-gray-800 brutal-shadow-lg" data-saved-src-removed="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+                </div>
+                
+                
+                <div class="bg-white border-2 border-gray-800 brutal-shadow p-8 md:p-12">
+                    <div class="prose prose-lg max-w-none">
+                        
+                        <p>If you're using Jira for project management and a separate tool for time tracking, your team is maintaining two overlapping datasets. They log work estimates in Jira, track actual time in your timesheet system, update issue status in Jira, and copy those same status updates into weekly reports. It's duplicate work that nobody enjoys and everyone resents.</p>
+
+<p>The promise of Jira integration is simple: enter time data once, use it everywhere. The reality is more nuanced. This guide will show you how to build an integration that actually eliminates double-entry without creating new problems.</p>
+
+<p>Understanding what Jira already tracks</p>
+
+<p>Jira contains substantial time-related data that most teams underutilize. Every issue can have original time estimates, remaining time estimates, and logged work entries. Sprints track velocity and capacity. Workflow transitions create timestamps showing when work actually started and finished.</p>
+
+<p>The problem isn't that Jira lacks time tracking capabilities. It's that Jira's time data doesn't connect to payroll, client billing, leave management, or the other systems that require comprehensive time tracking.</p>
+
+<p>A proper integration bridges this gap without asking anyone to type the same work twice. BetterFlow does it by reading Jira: it pulls in issues, worklogs and comments and uses them to build the timesheet. It does not write anything back to Jira, so your issues, worklogs and statuses stay exactly as your team left them.</p>
+
+<p>Design principle: single source of truth</p>
+
+<p>Effective integration requires choosing which system is authoritative for each type of data. Common patterns:</p>
+
+<ul>
+<li>Jira is authoritative for: Issue status, project assignments, sprint planning, story points, technical descriptions</li>
+<li>Timesheet system is authoritative for: Actual hours worked, billable vs non-billable classification, client billing data, payroll integration</li>
+<li>Read from Jira, never written back: Task descriptions, time logged per issue, project codes, user assignments</li>
+</ul>
+
+<p>Document these decisions and design your integration to enforce them. If Jira is authoritative for issue status, don't allow manual status overrides in your timesheet system that would create conflicts.</p>
+
+<p>Mapping Jira issues to billable time</p>
+
+<p>Not all Jira work is billable to clients. Internal issues, bugs in warranty periods, administrative tasks, and learning projects all generate Jira activity that shouldn't appear on client invoices.</p>
+
+<p>Create clear mapping rules based on issue type, project, or custom fields:</p>
+
+<ul>
+<li>Issues in client project with type "Story" or "Task" → Billable time</li>
+<li>Issues with type "Bug" created within 30 days of release → Billable</li>
+<li>Issues with type "Bug" older than 30 days → Non-billable (warranty work)</li>
+<li>Issues in internal project → Always non-billable</li>
+<li>Issues with custom field "Billable Status" → Use field value</li>
+</ul>
+
+<p>Make these rules visible to developers when they're logging time. Nothing frustrates teams more than having billable status randomly changed by opaque system rules they don't understand.</p>
+
+<p>Sync conflicts and resolution strategies</p>
+
+<p>Conflicts are inevitable when two systems can both modify the same data. A developer logs 4 hours in Jira, then updates their timesheet to 3.5 hours after realizing they overestimated. Which system wins?</p>
+
+<p>Common conflict resolution strategies:</p>
+
+<ul>
+<li>Last write wins: Most recent change overrides previous values</li>
+<li>Timesheet authoritative: Timesheet changes always override Jira (works if timesheet is payroll source)</li>
+<li>Manual resolution: Flag conflicts for human review</li>
+<li>Merge with audit log: Keep both values and timestamp them</li>
+</ul>
+
+<p>BetterFlow avoids this conflict by design: it only reads from Jira and never writes back, so the two systems cannot overwrite each other. The timesheet is the record for total hours worked (payroll requirement), and Jira stays the record for issue status and technical details. Jira activity sits next to each person's timesheet to help them write the entry; nothing in Jira is changed.</p>
+
+<p>Conclusion</p>
+
+<p>Jira integration done right eliminates redundant data entry, improves data quality, and creates unified visibility into project progress and time allocation. Done poorly, it creates brittle systems that break in confusing ways and train users to distrust automation.</p>
+
+<p>Start with clear decisions about which system is authoritative for each data type. Build sync mechanisms that handle conflicts gracefully and make integration status visible to users. The goal isn't perfect automation. It's reducing friction enough that teams willingly maintain accurate time data.</p>
+
+<p>Sources &amp; References
+</p>
+
+<ul>
+<li><a href="https://www.atlassian.com/agile/project-management">Atlassian - Jira Best Practices for Agile Teams</a></li>
+<li><a href="https://survey.stackoverflow.co/2024/">Stack Overflow: Developer Survey 2024</a></li>
+<li><a href="https://www.pmi.org/learning/thought-leadership/pulse">PMI: Pulse of the Profession 2024</a></li>
+</ul>
+
+
+                        <p class="text-gray-700 ">Related:
+            <a href="https://betterflow.eu/integrations/jira" class="underline font-medium text-gray-900">Jira time tracking</a>    </p>
+
+                        <hr>
+                        <p>
+                            Published by <a href="https://betterqa.co">BetterQA</a>, an ISO 27001 and ISO 9001 certified company with 8+ years of experience in software quality assurance.
+                            
+                                                        Last updated on <time datetime="2026-10-22">October 22, 2026</time>.
+                                                    </p>
+                        <ul>
+                            <li>Built by BetterQA, founded in 2018 in Cluj-Napoca, Romania</li>
+                            <li>ISO 27001 certified security and GDPR compliant</li>
+                            <li>Built by BetterQA, with QA clients in 20+ countries</li>
+                            <li>Complimentary for your first 6 months, no credit card required</li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+                <div class="mt-8 p-6 bg-white border-2 border-gray-800 brutal-shadow">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 font-sora">Share this article</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://x.com/intent/tweet?url=https%3A%2F%2Fbetterflow.eu%2Fblog%2Fjira-timesheet-integration-guide&amp;text=Jira+%2B+timesheets%3A+how+to+end+double-entry+forever" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 bg-sky-700 text-white border-2 border-sky-800 font-medium brutal-shadow-sm hover-brutal">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbetterflow.eu%2Fblog%2Fjira-timesheet-integration-guide" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white border-2 border-blue-800 font-medium brutal-shadow-sm hover-brutal">
+                            <i class="fab fa-linkedin-in"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            
+                        <section class="mt-16">
+                <div class="mb-8">
+                    <span class="inline-block px-4 py-2 border-2 border-gray-800 text-xs font-semibold tracking-widest uppercase mb-4 bg-white brutal-shadow-sm">
+                        RELATED ARTICLES
+                    </span>
+                    <h2 class="text-3xl font-bold text-gray-900 font-sora tracking-tight">Related articles</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                                            <article class="bg-white border-2 border-gray-800 brutal-shadow overflow-hidden hover-brutal transition-all">
+        <a href="https://betterflow.eu/blog/how-betterqa-runs-its-own-qa-team-on-betterflow" class="block">
+        <img sizes="(min-width: 1152px) 347px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" width="1200" height="630" alt="How BetterQA runs its own QA team on BetterFlow" loading="lazy" decoding="async" class="w-full h-48 object-cover border-b-2 border-gray-800" data-saved-src-removed="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+    </a>
+        <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 font-sora tracking-tight">
+            <a href="https://betterflow.eu/blog/how-betterqa-runs-its-own-qa-team-on-betterflow" class="hover:text-gray-700 transition-colors">
+                How BetterQA runs its own QA team on BetterFlow
+            </a>
+        </h2>
+        <div class="flex items-center gap-3 text-gray-600 text-sm mb-3">
+            <span class="flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i>
+                <time datetime="2026-09-15">September 15, 2026</time>
+            </span>
+            <span>·</span>
+            <span class="flex items-center gap-1">
+                <i class="far fa-clock"></i>
+                5 min read
+            </span>
+        </div>
+        <p class="text-gray-600">
+            We built BetterFlow and we run our own testing work on it. The four things we track, why there is no weekly timesheet cy...
+        </p>
+        <a href="https://betterflow.eu/blog/how-betterqa-runs-its-own-qa-team-on-betterflow" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gray-800 text-white border-2 border-gray-800 font-medium text-sm brutal-shadow-sm hover-brutal">
+            Read more
+            <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+</article>
+                                            <article class="bg-white border-2 border-gray-800 brutal-shadow overflow-hidden hover-brutal transition-all">
+        <a href="https://betterflow.eu/blog/betterflow-featured-la-examiner-adaptive-workspaces" class="block">
+        <img sizes="(min-width: 1152px) 347px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" width="1200" height="630" alt="BetterFlow featured in LA Examiner: building trust in remote work tools" loading="lazy" decoding="async" class="w-full h-48 object-cover border-b-2 border-gray-800" data-saved-src-removed="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+    </a>
+        <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 font-sora tracking-tight">
+            <a href="https://betterflow.eu/blog/betterflow-featured-la-examiner-adaptive-workspaces" class="hover:text-gray-700 transition-colors">
+                BetterFlow featured in LA Examiner: building trust in remote work tools
+            </a>
+        </h2>
+        <div class="flex items-center gap-3 text-gray-600 text-sm mb-3">
+            <span class="flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i>
+                <time datetime="2026-03-19">March 19, 2026</time>
+            </span>
+            <span>·</span>
+            <span class="flex items-center gap-1">
+                <i class="far fa-clock"></i>
+                3 min read
+            </span>
+        </div>
+        <p class="text-gray-600">
+            LA Examiner featured BetterFlow founder Tudor Brad in a piece on adaptive workspaces and AI. The key takeaway: the futur...
+        </p>
+        <a href="https://betterflow.eu/blog/betterflow-featured-la-examiner-adaptive-workspaces" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gray-800 text-white border-2 border-gray-800 font-medium text-sm brutal-shadow-sm hover-brutal">
+            Read more
+            <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+</article>
+                                            <article class="bg-white border-2 border-gray-800 brutal-shadow overflow-hidden hover-brutal transition-all">
+        <a href="https://betterflow.eu/blog/betterflow-vs-desktime-comparison" class="block">
+        <img sizes="(min-width: 1152px) 347px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" width="1200" height="630" alt="BetterFlow vs DeskTime: deliverables over desktop monitoring" loading="lazy" decoding="async" class="w-full h-48 object-cover border-b-2 border-gray-800" data-saved-src-removed="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+    </a>
+        <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 font-sora tracking-tight">
+            <a href="https://betterflow.eu/blog/betterflow-vs-desktime-comparison" class="hover:text-gray-700 transition-colors">
+                BetterFlow vs DeskTime: deliverables over desktop monitoring
+            </a>
+        </h2>
+        <div class="flex items-center gap-3 text-gray-600 text-sm mb-3">
+            <span class="flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i>
+                <time datetime="2026-02-24">February 24, 2026</time>
+            </span>
+            <span>·</span>
+            <span class="flex items-center gap-1">
+                <i class="far fa-clock"></i>
+                4 min read
+            </span>
+        </div>
+        <p class="text-gray-600">
+            DeskTime tracks productive vs unproductive apps. BetterFlow tracks what matters: code shipped, bugs fixed, features deli...
+        </p>
+        <a href="https://betterflow.eu/blog/betterflow-vs-desktime-comparison" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gray-800 text-white border-2 border-gray-800 font-medium text-sm brutal-shadow-sm hover-brutal">
+            Read more
+            <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+</article>
+                                            <article class="bg-white border-2 border-gray-800 brutal-shadow overflow-hidden hover-brutal transition-all">
+        <a href="https://betterflow.eu/blog/betterflow-vs-hubstaff-comparison" class="block">
+        <img sizes="(min-width: 1152px) 347px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" width="1200" height="630" alt="BetterFlow vs Hubstaff: proving work without screenshots" loading="lazy" decoding="async" class="w-full h-48 object-cover border-b-2 border-gray-800" data-saved-src-removed="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+    </a>
+        <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 font-sora tracking-tight">
+            <a href="https://betterflow.eu/blog/betterflow-vs-hubstaff-comparison" class="hover:text-gray-700 transition-colors">
+                BetterFlow vs Hubstaff: proving work without screenshots
+            </a>
+        </h2>
+        <div class="flex items-center gap-3 text-gray-600 text-sm mb-3">
+            <span class="flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i>
+                <time datetime="2026-02-24">February 24, 2026</time>
+            </span>
+            <span>·</span>
+            <span class="flex items-center gap-1">
+                <i class="far fa-clock"></i>
+                4 min read
+            </span>
+        </div>
+        <p class="text-gray-600">
+            Hubstaff monitors employees with screenshots and activity tracking. BetterFlow proves work through deliverables instead:...
+        </p>
+        <a href="https://betterflow.eu/blog/betterflow-vs-hubstaff-comparison" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gray-800 text-white border-2 border-gray-800 font-medium text-sm brutal-shadow-sm hover-brutal">
+            Read more
+            <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+</article>
+                                            <article class="bg-white border-2 border-gray-800 brutal-shadow overflow-hidden hover-brutal transition-all">
+        <a href="https://betterflow.eu/blog/betterflow-vs-clockify-comparison" class="block">
+        <img sizes="(min-width: 1152px) 347px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" width="1200" height="630" alt="BetterFlow vs Clockify: why free timesheets cost you more" loading="lazy" decoding="async" class="w-full h-48 object-cover border-b-2 border-gray-800" data-saved-src-removed="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+    </a>
+        <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 font-sora tracking-tight">
+            <a href="https://betterflow.eu/blog/betterflow-vs-clockify-comparison" class="hover:text-gray-700 transition-colors">
+                BetterFlow vs Clockify: why free timesheets cost you more
+            </a>
+        </h2>
+        <div class="flex items-center gap-3 text-gray-600 text-sm mb-3">
+            <span class="flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i>
+                <time datetime="2026-02-24">February 24, 2026</time>
+            </span>
+            <span>·</span>
+            <span class="flex items-center gap-1">
+                <i class="far fa-clock"></i>
+                4 min read
+            </span>
+        </div>
+        <p class="text-gray-600">
+            Clockify offers unlimited free time tracking. But when timesheets go unverified, you lose 5-15% of billable hours to ina...
+        </p>
+        <a href="https://betterflow.eu/blog/betterflow-vs-clockify-comparison" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gray-800 text-white border-2 border-gray-800 font-medium text-sm brutal-shadow-sm hover-brutal">
+            Read more
+            <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+</article>
+                                            <article class="bg-white border-2 border-gray-800 brutal-shadow overflow-hidden hover-brutal transition-all">
+        <a href="https://betterflow.eu/blog/betterflow-vs-toggl-comparison" class="block">
+        <img sizes="(min-width: 1152px) 347px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, calc(100vw - 48px)" width="1200" height="630" alt="BetterFlow vs Toggl Track: AI verification vs manual time tracking" loading="lazy" decoding="async" class="w-full h-48 object-cover border-b-2 border-gray-800" data-saved-src-removed="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70" data-saved-srcset-removed="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&amp;h=210&amp;fit=crop&amp;auto=format&amp;q=70 400w, https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&amp;h=420&amp;fit=crop&amp;auto=format&amp;q=70 800w, https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&amp;h=630&amp;fit=crop&amp;auto=format&amp;q=70 1200w">
+    </a>
+        <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 font-sora tracking-tight">
+            <a href="https://betterflow.eu/blog/betterflow-vs-toggl-comparison" class="hover:text-gray-700 transition-colors">
+                BetterFlow vs Toggl Track: AI verification vs manual time tracking
+            </a>
+        </h2>
+        <div class="flex items-center gap-3 text-gray-600 text-sm mb-3">
+            <span class="flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i>
+                <time datetime="2026-02-24">February 24, 2026</time>
+            </span>
+            <span>·</span>
+            <span class="flex items-center gap-1">
+                <i class="far fa-clock"></i>
+                4 min read
+            </span>
+        </div>
+        <p class="text-gray-600">
+            Toggl Track is the go-to time tracker for millions. But tracking hours is not the same as verifying them. BetterFlow use...
+        </p>
+        <a href="https://betterflow.eu/blog/betterflow-vs-toggl-comparison" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gray-800 text-white border-2 border-gray-800 font-medium text-sm brutal-shadow-sm hover-brutal">
+            Read more
+            <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+</article>
+                                    </div>
+            </section>
+            
+            
+            <section class="mt-16" aria-labelledby="ecosystem-heading">
+    <h2 id="ecosystem-heading" class="sr-only">Built by BetterQA</h2>
+    <p class="text-gray-600 text-sm">
+        Built by BetterQA, <a href="https://betterqa.co/software-testing-services/" target="_blank" rel="noopener" class="text-bf-purple-dark font-semibold underline">software testing services</a> for teams that ship.
+    </p>
+</section>
+
+            
+            <div class="mt-12 text-center flex flex-wrap gap-4 justify-center">
+                <a href="https://betterflow.eu/blog" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-800 font-semibold brutal-shadow hover-brutal">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to all posts
+                </a>
+                <a href="https://betterflow.eu/blog/archive" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-800 border-2 border-gray-800 font-semibold brutal-shadow hover-brutal">
+                    <i class="fas fa-list"></i>
+                    Browse full archive
+                </a>
+            </div>
+        </main>
+
+        
+        <footer class="bg-gray-900 text-white border-t-4 border-gray-800 py-8 mt-12">
+            <div class="container mx-auto px-6 text-center text-gray-200 text-sm">
+                <p>© 2026 BetterFlow. A <a href="https://betterqa.co/software-testing-services/agentic-qa-testing/" target="_blank" rel="noopener" class="text-white underline font-semibold">BetterQA — Agentic QA Testing</a> product.</p>
+                <div class="mt-4 flex flex-wrap gap-4 justify-center">
+                    <a href="https://betterflow.eu/blog" class="hover:text-white transition-colors">Blog</a>
+                    <span>·</span>
+                    <a href="https://betterflow.eu/blog/archive" class="hover:text-white transition-colors">All articles</a>
+                    <span>·</span>
+                    <a href="https://betterflow.eu/legal/terms" class="hover:text-white transition-colors">Terms</a>
+                    <span>·</span>
+                    <a href="https://betterflow.eu/legal/privacy" class="hover:text-white transition-colors">Privacy</a>
+                    <span>·</span>
+                    <a href="https://betterflow.eu/legal/cookies" class="hover:text-white transition-colors">Cookies</a>
+                    <span>·</span> <a href="https://betterflow.eu/legal/cookies" data-analytics-settings="" class="hover:text-white transition-colors">Cookie settings</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+<div id="bf-analytics-banner" role="region" aria-label="Cookie consent" class="fixed inset-x-0 bottom-0 z-50 p-4">
+        <div class="mx-auto max-w-3xl rounded-lg bg-white text-gray-800 shadow-xl border border-gray-200 p-4 sm:flex sm:items-center sm:gap-4">
+            <p class="text-sm flex-1">
+                We would like to use Google Analytics cookies to see how visitors use our public pages. They are only set if you accept.
+                <a href="https://betterflow.eu/legal/cookies" class="underline text-purple-700">Cookie policy</a>
+            </p>
+            <div class="mt-3 flex gap-2 sm:mt-0 shrink-0">
+                <button type="button" data-analytics-choice="denied" class="px-4 py-2 text-sm rounded-md border border-gray-300 bg-white hover:bg-gray-50">Reject</button>
+                <button type="button" data-analytics-choice="granted" class="px-4 py-2 text-sm rounded-md bg-purple-700 text-white hover:bg-purple-800">Accept</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body></html>

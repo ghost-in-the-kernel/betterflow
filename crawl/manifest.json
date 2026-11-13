@@ -1,0 +1,48 @@
+{
+  "tool": "suite-builder",
+  "version": "1.39.0",
+  "generator": {
+    "deterministic": true,
+    "models": "none"
+  },
+  "build": {
+    "commit": "888f2d07af432849a148172ff911ace4f4735b0a",
+    "branch": "main",
+    "dirty": true
+  },
+  "framework": "playwright",
+  "generatedAt": "2026-11-13T21:43:34.483Z",
+  "command": "suite-builder build https://betterflow.eu/",
+  "templates": "crawl/betterflow.eu.templates.json",
+  "crawl": "crawl/betterflow.eu.crawl.json",
+  "crawlFileSaved": "2026-11-13T21:43:33.802Z",
+  "pages": {
+    "ship": "all",
+    "crawl": "3536c17f7d93e4ff",
+    "signedIn": false,
+    "roles": []
+  },
+  "accounts": [
+    {
+      "role": "user",
+      "file": "secrets/user.login",
+      "environment": [
+        "SUITE_USER_USERNAME",
+        "SUITE_USER_PASSWORD"
+      ],
+      "docked": "<Suite Builder's secrets folder, DOCK.md's last line>/<site>/user.login"
+    },
+    {
+      "role": "admin",
+      "file": "secrets/admin.login",
+      "environment": [
+        "SUITE_ADMIN_USERNAME",
+        "SUITE_ADMIN_PASSWORD"
+      ],
+      "docked": "<Suite Builder's secrets folder, DOCK.md's last line>/<site>/admin.login"
+    }
+  ],
+  "classes": [
+    "audit"
+  ]
+}
